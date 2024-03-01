@@ -5,3 +5,13 @@
  * HINT:
  * Use `unnest(special_features)` in a subquery.
  */
+
+SELECT title
+FROM film
+WHERE rating = 'G'
+AND EXISTS (
+  SELECT 1
+  FROM unnest(special_features) as sf(feature)
+  WHERE feature = 'Trailers'
+)
+ORDER BY title ASC;
